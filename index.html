@@ -1,0 +1,345 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Meeteorite Data Visualization</title>
+    <!-- 样式表 -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- d3库 -->
+    <script src="src/d3.v7.min.js" type="text/javascript"></script>
+    <!-- 陨石分类分布可视化相关代码 -->
+    <script src="src/classify.js" type="text/javascript"></script>
+    <!-- 陨石质量数量分布可视化相关代码 -->
+    <script src="src/scatter.js" type="text/javascript"></script>
+    <!-- 陨石地理分布可视化相关代码 -->
+    <script src="src/distribution.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="slider">
+      <Slide id="intro">
+        <img src="img/intro.png" alt="A H3.8 chondrite meteorite" class="fillall bg">
+        <div id="intro_side">
+          <span class="title">陨石的故事</span>
+          <span class="subtitle">The Story of Meteorites</span>
+          <br/>
+          <span>2022数据可视化大作业<br/>050644zf a.k.a nightsky</span>
+          <br/>
+        </div>
+        <a href="https://www.mindat.org/min-52226.html" class="reference">
+          [1] H3.8 chondrite meteorite
+        </a>
+      </Slide>      
+      <Slide id="def">
+        <img src="img/2.jpg" alt="Rare meteorite recovered in UK after spectacular fireball" class="fillall bg"/>
+        
+        <div class="banner">
+          <div class="col" style="width: 40%;">
+            <span class="title">陨石的形成</span>
+            <span class="subtitle">The Formation of Meteorites</span>
+            <br/>
+            <span>
+              <Bold>陨石</Bold>是起源于外太空某一物体并坠落在地面的固体碎片。如彗星、小行星或流星体，在穿过大气层到达固体行星或卫星表面后剩下来。当原始物体进入大气层时，各种因素，如摩擦、压力和与大气气体的化学相互作用使其升温并辐射能量。然后它变成流星。天文学家称其中与地球碰最明亮的流星的例子为“火流星”。一些较大的火流星可能会坠落在地面上，形成了陨石。<br/> <br/>
+              图为2021年2月28日晚在英国温什科姆镇流星监测相机拍到的一颗火流星。产生了小图所示的陨石，重300克。
+            </span>
+          </div>
+          <div class="col">
+            <img src="img/2_2.png" class="subimg" />
+          </div>
+        </div>
+        <a href="https://www.manchester.ac.uk/discover/news/rare-meteorite-recovered-in-uk-after-spectacular-fireball/" class="reference">
+          [2] Rare meteorite recovered in UK after spectacular fireball
+        </a>
+      </Slide>
+      <Slide id="classify">
+        <div class="left">
+          <span class="title">陨石的分类</span>
+          <span class="subtitle">The Classification of Meteorites</span>
+          <br/>
+          <span>
+            按照陨石的金属含量从低到高排序，陨石可大致分为三类：
+            <span style="color: #E15759;">石陨石</span>、
+            <span style="color: #F28E2C;">石铁陨石</span>、
+            <span style="color: #4E79A7;">铁陨石</span>。
+            <br/><br/>
+            右边的两个饼图展示了不同类别陨石的数量和总质量,可以看到不同类别的陨石在数量上和质量上的分布有着显著的差异，这是由于不同种类陨石的性质造成的。
+            
+          </span>          
+        </div>
+        <div style="display:flex; flex-direction:column;">
+        <svg id="value"></svg>
+        <svg id="mass"></svg>          
+        </div>
+        <div class="right">
+          <div id="intro_default" style="color:slategrey">
+            鼠标悬停于对应区域可以看到该类别的详细信息。
+          </div>
+          <div id="intro_Stone" class="intro">
+            <div>
+            <span class="title" style="color: #E15759;">石陨石</span>
+            <span class="subtitle">Stone Meteorite</span>              
+            </div>
+            <span>现存数量最多的陨石种类。可分为<span style="color: #59A14F;">球粒陨石</span>和<span style="color: #76B7B2;">无球粒陨石</span></span>
+          </div>
+          <div id="intro_Chondrite"  style="margin-left: 5%"  class="intro">
+            <div>
+
+            <span style="color: #59A14F;" class="title">球粒陨石</span>
+            <span class="subtitle">Chondrite</span>
+            </div>
+
+            <span><span style="color: #59A14F;">球粒陨石</span>是母体未经过熔融或行星分化，而未被改变的<span style="color: #E15759;">石陨石</span>对它们的研究有助于了解太阳系的起源和年龄、有机化合物的合成、生命起源，以及为地球上水的存在提供了重要线索。它们的特点之一是存在着由不同矿物形成圆形晶粒的陨石球粒，通常构成球粒陨石体积的20%至80%。</span>
+            <br/><br/>
+            <img src="/img/Chondrules_grassland_1.jpg"/>
+            <br/><br/>
+            <span>上图展示了Grassland陨石的剖面放大图像，可见球粒结构。</span>
+            <a href="http://www.lpi.usra.edu/meteor/metbull.php?code=10959" class="reference">[3] Grassland; Meteoritical Bulletin Database. The Meteoritical Society</a>
+          </div>          
+          <div id="intro_Achondrite" style="margin-left: 5%"  class="intro">
+            <div>
+            <span style="color:#76B7B2 ;" class="title">无球粒陨石</span>
+            <span class="subtitle">Achondrite</span>
+            </div>
+            <span><span style="color:#76B7B2 ;">无球粒陨石</span>是没有球粒的一种<span style="color: #E15759;">石陨石</span>。它包含的成分与地球上的玄武岩或火成岩相似，并且曾在流星体母体内或本身经过不同程度的熔化和再结晶的地质分异作用。因此，<span style="color:#76B7B2 ;">无球粒陨石</span>有不同的纹理和火成岩过程的矿物学特征。</span>
+            <br/><br/>
+            <img src="/img/Cumberland_Falls_meteorite.jpg"/>
+            <br/><br/>
+            <span>上图为Cumberland陨石，坠落于1919年。</span>
+            <a href="https://flickr.com/photos/8435962@N06/2986749123" class="reference">[4] Claire H. - originally posted to Flickr as Stone Achondrite (Aubrite) Meteor</a>
+          </div>
+          <div id="intro_Pallasite" class="intro">
+            <div>
+            <span style="color: #F28E2C;" class="title">石铁陨石</span>
+            <span class="subtitle">Pallasite</span>              
+            </div>
+            <span>一种非常罕见的陨石，数量极少。它包含厘米尺度的橄榄石晶体。</span>
+            <br/><br/>
+            <img src="/img/1024px-NHM_-_Pallasit_Fukang.jpg"/>
+            <br/><br/>
+            <span>图为阜康陨石切片，2000年发现于中国新疆。切片中可见大量美丽的橄榄石结晶。</span>
+            <a href="https://en.wikipedia.org/wiki/Fukang_meteorite#/media/File:NHM_-_Pallasit_Fukang.jpg" class="reference">[5] Wolfgang Sauber </a>
+          </div>          
+          <div id="intro_Iron" class="intro">
+            <div>
+            <span style="color: #4E79A7;" class="title">铁陨石</span>
+            <span class="subtitle">Iron Meteorite</span>              
+            </div>
+            <span><span style="color: #4E79A7;">铁陨石</span>又称陨铁，是包含大量的铁-镍合金的陨石。在这些陨石内的金属被称为“陨铁”。
+            </span>
+            <br/><br/>
+            <img src="/img/The_Hoba_Meteorite_near_Grootfontein.jpg"/>
+            <br/><br/>
+            <span>图为霍巴陨铁，重60吨，是已发现的最大陨石，发现于1920年，推测坠落于8万年前。</span>
+            <a href="https://www.flickr.com/photos/37804160@N00/133141091" class="reference">[6] Mike - originally posted to Flickr as The Hoba Meteorite near Grootfontein</a>
+          </div>
+
+        </div>
+      </Slide>
+      <Slide id="scattering">
+        <div class="left">
+          <span class="title">陨石的数量质量分布</span>
+          <span class="subtitle">The Quantity & Mass Distribution of Meteorites</span>
+          <br/>
+          <span>
+            右图为陨石的发现年份-质量分布图。颜色表示对应的陨石分类。<br/>
+            可以发现不同种类的陨石的质量和数量分布存在显著的差异：<br/><br/>
+            <Bold style="color: #4E79A7;">铁陨石</Bold>外观较<span style="color: #E15759;">石陨石</span>更为显眼，更能承受进入大气层的烧蚀作用和地面的风化作用。因此尽管数量较为稀少，但<span style="color: #4E79A7;">铁陨石</span>很容易被发现且质量往往很大。
+            <br/><br/>
+            <span style="color: #E15759;">石陨石</span>（包括<Bold style="color: #59A14F;">球粒陨石</Bold>和<Bold style="color: #76B7B2;">无球粒陨石</Bold>）由于自身较脆，更容易在进入大气层时分裂，因此数量更多，质量较小。
+            <br/><br/>
+            <Bold style="color: #F28E2C;">石铁陨石</Bold>的质量分布介于<span style="color: #4E79A7;">铁陨石</span>和<span style="color: #E15759;">石陨石</span>两者之间，但数量非常稀少。
+            
+          </span>
+        </div>
+        <div class="right">
+          <svg id="scatter"></svg>
+        </div>
+        
+      </Slide>
+      <Slide id="distribution">
+        <div class="left">
+          <span class="title">陨石的地理分布</span>
+          <span class="subtitle">The Geological Distribution of Meteorites</span>
+          <br/>
+          <span>
+            有记录发现的第一颗陨石是直方陨石，于861年发现于日本福冈县。自此以后，人类开始在地球的各个角落发现陨石的存在，有些陨石在坠落事件发生后很快就被发现，称为<Bold>坠落陨石</Bold>。在坠落后很长一段时间才被人发现的陨石称为<Bold>发现陨石</Bold>。
+            <br/><br/>
+            右侧地图展示了截至2013年质量大于1千克的陨石落点，点的大小对应陨石质量，颜色对应陨石种类。在沙漠等一些气候地理条件合适的地区，陨石更容易被保存和发现，因此记录的陨石更多。
+            <br/><br/>
+            右侧折线图记录了陨石的数量随着年份的增长情况。在近代随着人类对陨石了解更加深入，人类发现的陨石数量出现了爆发性的增长。
+            <br/><br/>
+            <Bold>操作说明：</Bold>鼠标悬停在地图对应点上可以查看陨石的详细信息。拖动和滚动鼠标可以缩放地图。点击底部播放按钮可查看陨石的发现历史。拖动年份可定位到指定年份。
+          </span>          
+        </div>      
+        <div class="right">
+          <svg id="map"></svg>
+          <svg id="timeaxis"></svg>          
+          <div class="buttons">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" id="fastrewind"><path d="M11 16.07V7.93c0-.81-.91-1.28-1.58-.82l-5.77 4.07c-.56.4-.56 1.24 0 1.63l5.77 4.07c.67.47 1.58 0 1.58-.81zm1.66-3.25l5.77 4.07c.66.47 1.58-.01 1.58-.82V7.93c0-.81-.91-1.28-1.58-.82l-5.77 4.07a1 1 0 0 0 0 1.64z" fill="currentColor" data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" id="play"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18a1 1 0 0 0 0-1.69L9.54 5.98A.998.998 0 0 0 8 6.82z" fill="currentColor" data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;" ></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" id="fastforward"><path d="M5.58 16.89l5.77-4.07c.56-.4.56-1.24 0-1.63L5.58 7.11C4.91 6.65 4 7.12 4 7.93v8.14c0 .81.91 1.28 1.58.82zM13 7.93v8.14c0 .81.91 1.28 1.58.82l5.77-4.07c.56-.4.56-1.24 0-1.63l-5.77-4.07c-.67-.47-1.58 0-1.58.81z" fill="currentColor" data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" id="replay"><path d="M12 5V2.21c0-.45-.54-.67-.85-.35l-3.8 3.79c-.2.2-.2.51 0 .71l3.79 3.79c.32.31.86.09.86-.36V7c3.73 0 6.68 3.42 5.86 7.29c-.47 2.27-2.31 4.1-4.57 4.57c-3.57.75-6.75-1.7-7.23-5.01a1 1 0 0 0-.98-.85c-.6 0-1.08.53-1 1.13c.62 4.39 4.8 7.64 9.53 6.72c3.12-.61 5.63-3.12 6.24-6.24C20.84 9.48 16.94 5 12 5z" fill="currentColor" data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path></svg>
+          </div>
+        </div>
+      </Slide>
+      <Slide id="epilog">
+        <img src="/img/Sugar-Delivered-to-Earth-From-Space.jpg" class="fillall bg"/>
+        <div class="center">
+          <span>
+          <span class="title">结语</span>
+          <span class="subtitle">Epilog</span>            
+          </span>
+
+          
+          <span>
+            <br/><br/>
+            在人类进入太空以前，陨石是人类了解太阳系物质构成的唯一窗口。
+            <br/><br/>
+            这些天外来客，有些记录了太阳系形成初期的状态，让我们能一瞥太阳系形成时的混沌状态。
+            <br/><br/>
+            而有些陨石来自于天体的冲击事件，例如月球陨石和火星陨石。
+            <br/>
+            它们经过数十亿年的流浪，坠落在地球，让我们能够在拜访太空之前就能对这些天体的构成有了一定的了解。
+            <br/><br/>
+            此外，在陨石中，科学家还发现了嘧啶、多环芳香烃等复杂的有机分子结构。这些陨石可能正是地球的生命之源。
+            <br/><br/>
+            陨石的故事尚未完结，期待未来我们能用它解开更多地球、太阳系和宇宙的奥秘。
+          </span>
+        </div>
+      </Slide>
+      <Slide id="fin">
+        <div>
+        <span class="title">Thank you for watching!</span><br/><br/>
+        <span>
+          可视化框架：<a href="https://github.com/d3/d3">d3.js</a><br/><br/>
+          数据来源：<a href="https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh">NASA陨石数据库</a><br/>
+
+        </span>          
+      </div>
+
+      </Slide>
+    </div>
+
+  </body>
+
+  <script type="text/javascript">
+  //获取页面的高和宽
+  function getHeight() {
+    return Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.offsetHeight,
+      document.documentElement.clientHeight
+    );
+  }
+
+  function getWidth() {
+    return Math.max(
+      document.body.scrollWidth,
+      document.documentElement.scrollWidth,
+      document.body.offsetWidth,
+      document.documentElement.offsetWidth,
+      document.documentElement.clientWidth
+    );
+  }
+
+  const page_height = getHeight(), page_width = getWidth();
+  console.log(page_height, page_width);
+
+  //陨石数据，按类别分类的数据，按年份分类的数据
+  var meteorite_data, class_data, year_data;
+  //世界地图数据，地图投影
+  var worldMap, map_projection;
+
+  //陨石分类正则表达式
+  const iron_re = /Iron/;
+  const palla_re = /Pallasite/;
+  const achondrite_re = /(Acapulcoite|Lodranite|Brachinite|Winonaite|Ureilite|Howardite|Eucrite|Diogenite|Lunar|Martian|Angrite|Aubrite)/i
+
+  //播放按钮和暂停按钮的样式
+  const play_icon = 'M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18a1 1 0 0 0 0-1.69L9.54 5.98A.998.998 0 0 0 8 6.82z', pause_icon = 'M8 19c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2s-2 .9-2 2v10c0 1.1.9 2 2 2zm6-12v10c0 1.1.9 2 2 2s2-.9 2-2V7c0-1.1-.9-2-2-2s-2 .9-2 2z';
+
+  //基于分类名称获取陨石分类
+  function getType(recclass){
+    if(iron_re.test(recclass)){
+      return "Iron";
+    }
+    else if(palla_re.test(recclass)){
+      return "Pallasite";
+    }
+    else if(achondrite_re.test(recclass)){
+      return "Achondrite";
+    }
+    else{
+      return "Chondrite";
+    }
+  }
+
+  //陨石分类的对应色索引
+  const color_map = {
+    "Iron": 0,
+    "Pallasite": 1,
+    "Achondrite": 3,
+    "Chondrite": 4
+  }
+
+  //陨石分类的翻译
+  const type_cn = { 
+    "Iron": "铁陨石",
+    "Pallasite": "石铁陨石",
+    "Achondrite": "无球粒陨石",
+    "Chondrite": "球粒陨石"
+  }
+
+  //记录当前年份，年份动画的interval ID
+  var current_year=860, animation = null;
+
+  //载入数据
+  d3.csv('data/Meteorite_Landings.csv').then((mdata)=>{
+      /*陨石数据预处理，包括以下属性
+      年份：数值
+      纬度：数值
+      经度：数值
+      质量：数值
+      类型：由详细分类给出的字符串
+      */
+
+      meteorite_data = mdata.map((d)=>{
+        var value = d;
+        value.year = +d.year;
+        value.reclat = +d.reclat;
+        value.reclong = +d.reclong;
+        value['mass (g)'] = +d['mass (g)'];
+        value.type = getType(d.recclass);
+        return value;
+      })
+      //按类别筛选得到陨石分类数据
+      class_data = filterclass(meteorite_data);
+      //按年份筛选得到陨石年份数据
+      year_data = filteryear(meteorite_data);
+      //绘制陨石数量饼图
+      draw_class_pie(class_data, 'value');
+      //绘制陨石质量饼图
+      draw_class_pie(class_data, 'mass');
+      //绘制陨石质量-年份散点图
+      drawScatter(meteorite_data);
+      //绘制陨石年份折线图
+      draw_timeaxis(year_data);
+
+      //载入世界地图数据
+      d3.json('data/world.json').then((mdata)=>{
+        worldMap = mdata;
+        //绘制地图，获取地图投影
+        map_projection = drawMap(meteorite_data);
+        //按年份更新地图
+        updateMapbyYear(meteorite_data, 850)
+    })      
+  })
+    
+  //陨石分类页代码参见 ./src/classify.js
+  //陨石质量数量分布代码参见 ./src/scatter.js
+  //陨石分布页代码参见 ./src/distribution.js
+
+      
+  </script>
+
+</html>

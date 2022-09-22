@@ -1,0 +1,296 @@
+/*Black background*/
+body {
+    background-color: #111;
+    margin: 0px;
+    font-size: 10px;
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  font-family: sans-serif;
+  scroll-snap-type: y mandatory;	
+  display: flex;
+  flex-direction: column;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+Slide {
+  width: 100vw;
+  height: 100vh;
+  min-height: 50vw;
+  max-height: 60vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  scroll-snap-align: start;
+  position: relative;
+  border: 1px solid rgba(0,0,0,0.5);
+  color: white
+}
+
+Bold{
+  font-weight: bold;
+}
+
+.fillall{
+  width: 100%;
+  height: 100%;
+}
+
+.bg{
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#intro_side{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 5%;
+  border-right: 3px solid goldenrod;
+}
+
+.title{
+  font-size: 2em;
+  font-weight: bold;
+  color: gold;
+  border-left: 5px solid gold;
+  padding-left: 5px;
+}
+
+.subtitle{
+  font-size: 1.5em;
+  font-weight: bold;
+  color: goldenrod;
+  border-left: 5px solid gold;
+  padding-left: 5px;
+}
+
+#intro .title{
+  font-size: 4em;
+}
+
+#intro .subtitle{
+  font-size: 2em;
+}
+
+.reference{
+  max-width: 30vw;
+  color: gray;
+  font-size: 1em;
+  text-decoration: underline;
+  /*Bottom right of the slide*/
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+}
+
+#def .banner{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 20px;
+  border-top: 3px solid goldenrod;
+}
+
+#def .banner span{
+
+  width: 95%;
+}
+
+.col{
+  display: flex;
+  flex-direction: column;
+}
+
+#def .subimg{
+  /* position: absolute;
+  bottom: 10%;
+  right: 15%; */
+  border-radius: 3%;
+  width: 200px;
+  border: 3px solid goldenrod;
+}
+
+/* #classify .arc{
+  box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, 0.8);
+} */
+
+#classify{
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#classify .left{
+  width: 30%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding:0% 3%;
+  border-right: 3px solid goldenrod;
+}
+
+#classify .right{
+  margin-right: 5%;
+  width: 30%;
+}
+
+#classify .right .intro{
+  display: none;
+  flex-direction: column;
+  margin: 1% 0%;
+}
+
+#classify .right .intro div{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+#classify .right .intro img{
+  box-shadow: 0px 0px 8px 4px rgba(255, 255, 255, 0.5);
+}
+
+#classify .right .title{
+  border: none;
+  padding: 0px;
+}
+
+#classify .right .subtitle{
+  color: gray;
+  border: none;
+  padding: 0px;
+}
+
+#scattering{
+  flex-direction: row;
+  justify-content: space-between;  
+}
+
+#scattering .left{
+  width: 30%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding:0% 3%;
+  border-right: 3px solid goldenrod;
+}
+
+#scatter{
+  margin-right: 5%;
+}
+
+#distribution{
+  flex-direction: row;
+  margin-right: 10px;
+}
+
+#distribution .left{
+  width: 30%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding:0% 3%;
+  border-right: 3px solid goldenrod;
+}
+
+#distribution .right{
+  padding: 3% 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#map{
+  margin-bottom: 10px;
+}
+
+#distribution .buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#distribution .buttons svg{
+  width: 40px;
+  margin: 5px;
+}
+
+#epilog{
+  justify-content: center;
+  align-items: center;
+}
+
+#epilog .title{
+  border-left: none;
+  padding-left: none;
+}
+
+#epilog .subtitle{
+  border-left: none;
+  padding-left: none;
+}
+
+#epilog span{
+  text-align: center;
+}
+
+#epilog .bg{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+#epilog .center{
+  background-color: rgba(0,0,0,0.8);
+  padding: 20px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#fin{
+  display: flex;
+  justify-content: end;
+  align-items: flex-start;
+  height: 50vh;
+  min-height: 50vh;
+}
+
+#fin div{
+  margin-left: 5%;
+  margin-bottom: 5%;
+}
+
+#fin a{
+  color: goldenrod;
+}
